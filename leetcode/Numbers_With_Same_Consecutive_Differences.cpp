@@ -5,106 +5,44 @@ using namespace std;
 //https://leetcode.com/explore/challenge/card/august-leetcoding-challenge/551/week-3-august-15th-august-21st/3428/
 
 class Solution {
-public:
-    vector<int> numsSameConsecDiff(int N, int K) {
-        
-        int mul=10;
-        int n=N;
-        int i=1;
-        int num=1;
-
-        vector<int> res;
-        unordered_map<int,int> map;
-        bool ok=true;
-
-        while(i<=9)
-        {
-            num=i;
-            n=N;
-            
-            ok=true;
-            while(n-->1)
-            {
-                if((num%10+K>=10) && (num%10-K)<0)
-                {
-                    ok=false;
-                     break; 
-                }
-                
-                if(n==2 && map.find(num*mul+(num%10+K))!=map.end())
-                {
-                    map[num*mul+(num%10-K)]=num*mul+(num%10-K);
-                    res.push_back(num*mul+(num%10-K));
-                    break;
-                }
-                else if(n==2 && map.find(num*mul+(num%10-K))!=map.end())
-                {
-                    map[num*mul+(num%10+K)]=num*mul+(num%10+K);
-                    res.push_back(num*mul+(num%10+K));
-                    break;
-                }
-
-                num=(num%10+K<10)?num*mul+(num%10+K):num*mul+(num%10-K);
-     
-            }
-            
-             
-            if(ok && map.find(num)==map.end())
-            {
-                map[num]=num;
-                res.push_back(num);
-                i++;
-                continue;
-            }
-
-            i++;           
-       }
-        
-        i=9;
-        while(i>=1)
-        {
-            num=i;
-            n=N;
-            
-            ok=true;
-            while(n-->1)
-            {
-                if((num%10+K>=10) && (num%10-K)<0)
-                {
-                    ok=false;
-                     break; 
-                }
-                
-                if(n==2 && map.find(num*mul+(num%10+K))!=map.end())
-                {
-                    map[num*mul+(num%10-K)]=num*mul+(num%10-K);
-                    res.push_back(num*mul+(num%10-K));
-                    break;
-                }
-                else if(n==2 && map.find(num*mul+(num%10-K))!=map.end())
-                {
-                    map[num*mul+(num%10+K)]=num*mul+(num%10+K);
-                    res.push_back(num*mul+(num%10+K));
-                    break;
-                }
-
-                num=(num%10+K<10)?num*mul+(num%10+K):num*mul+(num%10-K);
-     
-            }
-            
-             
-            if(ok && map.find(num)==map.end())
-            {
-                map[num]=num;
-                res.push_back(num);
-                i--;
-                continue;
-            }
-            
-            i--;
-            
+ private:
+    void DFS(int n,int k,int start_num,vector<int> & res)
+    {
+        if(n==0)
+        {   
+             res.push_back(start_num);
+             return;
         }
 
-        return res;
+        vector<int> store_next_node;
+
+        store_next_node.push_back(start_num%10+k);
+        if(k!=0)
+            store_next_node.push_back(start_num%10-k);
+
+         //This loop is applied to make the node a root of the subtree.   
+        for(int i=0;i<store_next_node.size();i++)
+
+            //This if statement is supplied to select only those numbers which are [0,9] only.
+            if(store_next_node[i]>=0 && store_next_node[i]<10)
+            {
+                int num=start_num*10+store_next_node[i];  
+                DFS(n-1,k,num,res);     
+            }          
+      
+    }
+
+ 
+public:
+   
+    vector<int> numsSameConsecDiff(int N, int K) {
+    
+     if(N==1)
+         return {0,1,2,3,4,5,6,7,8,9};
+       vector<int> res;  
+     for(int start_num=1;start_num<10;start_num++)   
+       DFS(N-1,K,start_num,res);
+
+     return res; 
     }
 };
