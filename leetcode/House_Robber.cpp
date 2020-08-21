@@ -14,6 +14,10 @@ public:
         if(n==0)
             return 0;
 
+        //incl used max we can have including elements till the current element & current element as well
+        // provided the condition is followed.
+
+        //excl used max we can have including elements till the current element but not including the current element.
         int incl=nums[0],excl=0,temp=0;
         
         for(int i=1;i<n;i++)
