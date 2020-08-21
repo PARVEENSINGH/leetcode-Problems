@@ -111,5 +111,4 @@ public:
         }
         container[i]->next=NULL;*/
     }
-    }
 };
