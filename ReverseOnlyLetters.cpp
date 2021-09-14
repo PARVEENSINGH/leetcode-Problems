@@ -1,4 +1,6 @@
-class Solution {
+#include<bits/stdc++.h>
+using namespace std;
+public class Solution {
 public:
     string reverseOnlyLetters(string s) {
         int n = s.length()-1;
