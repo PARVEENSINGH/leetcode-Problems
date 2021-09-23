@@ -1,24 +1,24 @@
 #include<bits/stdc++.h>
 using namespace std;
-class Solution {
-public:
-    int maxLength(vector<string>& arr) {
-        vector<string> res = {""};
-        int ans = 0;
-        for(string word:arr){
+// class Solution {
+// public:
+//     int maxLength(vector<string>& arr) {
+//         vector<string> res = {""};
+//         int ans = 0;
+//         for(string word:arr){
 
-            for(int i = 0;i<res.size();i++){
-                string temp = res[i]+word;
-                unordered_set<char> duplicate(temp.begin(),temp.end());
-                if(temp.size()!=duplicate.size())
-                    continue;
-                res.push_back(temp);
-                ans = max(ans,(int)temp.size());   
-            }
-        }  
-        return ans;
-    }
-};
+//             for(int i = 0;i<res.size();i++){
+//                 string temp = res[i]+word;
+//                 unordered_set<char> duplicate(temp.begin(),temp.end());
+//                 if(temp.size()!=duplicate.size())
+//                     continue;
+//                 res.push_back(temp);
+//                 ans = max(ans,(int)temp.size());   
+//             }
+//         }  
+//         return ans;
+//     }
+// };
 
 //using DP
 
