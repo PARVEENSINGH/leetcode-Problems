@@ -9,20 +9,16 @@ public:
     vector<int> findDisappearedNumbers(vector<int>& nums) {
         //int n = nums.size();
         vector<int> res;
-        sort(nums.begin(),nums.end());
-        bool flag = false;
-        int temp;
-        for(int i = 1;i<nums.size();i++){
-            temp = nums[i]-nums[i-1];
-            if(temp>1){
-                flag = true;
-                while(temp-->1)
-                    res.push_back(++nums[i-1]);
-            }
+        int idx;
+        for(int i = 0;i<nums.size();i++){
+            idx = abs(nums[i])-1;
+            nums[idx] = -1 *abs(nums[idx]);
         }
-        if(flag)
-         return res;
-        res.push_back(nums[0]+1); 
+
+        for(int i = 0;i<nums.size();i++){
+            if(nums[i]>0)
+                res.push_back(i+1);
+        }
         return res;
     }
 };
