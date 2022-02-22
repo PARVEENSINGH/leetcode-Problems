@@ -5,16 +5,34 @@ using namespace std;
 
 class Solution {
 public:
+    struct node{
+            int num;
+            int freq;
+            node(int a,int b){
+                num = a;
+                freq = b;
+            }
+        };
+    struct compare{
+        bool operator()(node const& a,node const& b){
+            return a.freq<b.freq;
+        }
+
+    };    
+        
     vector<int> topKFrequent(vector<int>& nums, int k) {
-        map<int,pair<int,int>> omap;
+        map<int,int> omap;
         vector<int> res;
-        for(int i = 0;i<nums.size();i++){
-            omap[nums[i]].first = nums[i];
-            omap[nums[i]].second++;
-        }
-        for(auto x = omap.begin();x!=omap.end();x++){
-            res.push_back(x)
-        }
+        
+        for(int i = 0;i<nums.size();i++)
+            omap[nums[i]]++;
+        priority_queue<node,vector<node>,compare> pq;    
+        for(auto it:omap)
+            pq.push(node(it.first,it.second));
+        while(k--){
+            res.push_back(pq.top().num);
+            pq.pop();
+        }    
         return res;
     }
 };
