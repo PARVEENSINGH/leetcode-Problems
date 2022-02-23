@@ -11,14 +11,11 @@ public:
             return 0;
         if(n==1)
             return columnTitle[0]-'A'+1;
-        int mul = 1,sum = 26;
+        int mul = 26;
         int res = 0,l =0;
-        while(n--){
-            res+=mul*(columnTitle[n]-'A'+1);
-            mul = sum*mul;
-            sum = mul;
-            cout<<columnTitle[l]<<" res="<<res<<" ";
-            //l++;
+        while(l<n){
+            res=res*mul+(columnTitle[l]-'A'+1);
+            l++;
         }  
         return res;      
     }
