@@ -21,15 +21,15 @@ public:
     int getMax(TreeNode* root,int &res){
         if(!root)
             return 0;
-        int leftsum = getMax(root->left,res);
-        int rightSum = getMax(root->right,res);
+        int leftsum = max(0,getMax(root->left,res));
+        int rightSum = max(0,getMax(root->right,res));
         res = max(res,leftsum+rightSum+root->val);
         return max(leftsum,rightSum)+root->val;       
     }
     int maxPathSum(TreeNode* root) {
         if(!root)
             return 0;
-        int res = 0;    
+        int res = INT_MIN;    
         getMax(root,res); 
         return res; 
   
