@@ -78,7 +78,7 @@ public:
                 else  
                     vec[i][j] = max(vec[i-1][j],vec[i][j-1]);   
             }
-        }   
+        }   .
         return vec[m][n];
     }
     int longestCommonSubsequence(string text1, string text2) {

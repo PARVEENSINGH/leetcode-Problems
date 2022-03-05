@@ -25,7 +25,7 @@ public:
             }
         }
 
-    //When palindromic length is greater tha 3, Traversing the matrix in diagonal fashion
+    //When palindromic length is greater than 3, Traversing the matrix in diagonal fashion
         for(int k = 2;k<n;++k){
             for(int i = 0;i<n-k;i++){
                 int j = i+k;
