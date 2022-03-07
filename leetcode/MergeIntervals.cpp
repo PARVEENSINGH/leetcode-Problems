@@ -7,7 +7,6 @@ class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
         vector<vector<int>> res;
-        vector<int> ans;
         int m = intervals.size();
         if(m==0)
             return res;
@@ -27,4 +26,22 @@ public:
         res.insert(res.end(),{mpair.first,mpair.second});
         return res;
     } 
+};
+
+
+//check concept for comparator
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        sort(intervals.begin(),intervals.end(),[&](auto& a, auto& b){return a[0]<b[0];});//check comparator concept
+        vector<vector<int>> ans;
+        ans.push_back(intervals[0]);
+        for(int i=1;i<intervals.size();i++){
+            if(intervals[i][0]>ans.back()[1])ans.push_back(intervals[i]);//intervals[i][0]>=ans.back()[1] wrong!
+            else{
+                ans.back()[1]=max(ans.back()[1],intervals[i][1]);
+            }
+        }
+        return ans;  
+    }
 };
