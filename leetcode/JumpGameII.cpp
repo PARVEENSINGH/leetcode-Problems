@@ -18,7 +18,7 @@ public:
                 dp[i] = -1;
                 continue;
             } 
-            for(int j = 1;i+j<nums.size() && j<=nums[i];j++){
+            for(int j = 1;i+j<nums.size() && j<=nums[i];j++){ // for no. of jumps
                 if(dp[i+j]!=-1 && dp[i+j]<min)
                     min = dp[i+j];
             }
