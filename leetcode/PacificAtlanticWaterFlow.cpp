@@ -5,12 +5,13 @@ using namespace std;
 
 class Solution {
 public:
+
     void dfs(vector<vector<int>>& heights,int r,int c,int dest,vector<vector<int>> &ocean){
         if(r<0 || c<0 || r>=heights.size() || c>=heights[0].size())
             return;
-        if(heights[r][c]<dest)
+        if(heights[r][c]<dest) //Water can't flow
             return;
-        if(heights[r][c]==-1)
+        if(ocean[r][c]==-1)     //Water from this cell can flow and already marked for the flow.
             return;
         ocean[r][c] = -1;        
         dfs(heights,r+1,c,heights[r][c],ocean);
@@ -18,6 +19,7 @@ public:
         dfs(heights,r,c+1,heights[r][c],ocean);
         dfs(heights,r,c-1,heights[r][c],ocean);
     }
+
     vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
         vector<vector<int>> ans;
         int row = heights.size();
@@ -26,10 +28,14 @@ public:
         vector<vector<int>> atlantic(row,vector<int>(col,0));
         if(heights.size()==0)
             return ans;
+
+        // Traversing each column from first row(Atlantic) to Pacific.    
         for(int c = 0;c<col;c++){
             dfs(heights,0,c,INT_MIN,atlantic);
             dfs(heights,row-1,c,INT_MIN,pacific);
-        }    
+        }     
+
+        // Traversing each row from first col(Atlantic) to Pacific.  
         for(int r = 0;r<row;r++){
             dfs(heights,r,0,INT_MIN,atlantic);
             dfs(heights,r,col-1,INT_MIN,pacific);
