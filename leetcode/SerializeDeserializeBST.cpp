@@ -32,7 +32,7 @@ public:
         serialize(root->left);
         res+=root->val;
         serialize(root->right);    
-    }
+    } 
 
     // Decodes your encoded data to tree.
     TreeNode* deserialize(string data) {
