@@ -22,8 +22,8 @@ public:
     ListNode* middleNode(ListNode* head) {
         
         ListNode* slptr=head;
-        LoistNode* fptr=head;
-
+        ListNode* fptr=head;
+        //ListNode* fptr = list->next; -> Use this if we want to print the first node when there are two middle nodes.
         while(fptr!=NULL && fptr->next!=NULL)
         {
             slptr=slptr->next;

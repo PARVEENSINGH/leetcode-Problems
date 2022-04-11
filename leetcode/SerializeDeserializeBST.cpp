@@ -54,9 +54,12 @@ public:
     TreeNode* deserialize(string data) {
         if(data.size()==0)
             return NULL;
+
+         //Check below concept(59-61) to extract the string till a particular delimator   
         stringstream st(data);
         string str;
-        getline(st,str,',');    
+        getline(st,str,','); 
+
         TreeNode* root = new TreeNode(stoi(str));
         queue<TreeNode*> q;
         q.push(root);
